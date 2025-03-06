@@ -3,41 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="login-container">
-        <div class="login-box">
-            <h2>Login</h2>
-            <form action="/submit-login" method="POST">
-                <div class="textbox">
-                    <input type="text" placeholder="Username or Email" name="username" required>
-                </div>
-                <div class="textbox">
-                    <input type="password" placeholder="Password" name="password" required>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" name="remember"> Remember Me
-                    </label>
-                </div>
-                <div class="forgot-password">
-                    <a href="#">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <div class="signup-link">
-                    <p>Don't have an account? <a href="#">Sign up</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
-</body>
-</html>
-/* General Styles */
+    <title>Login Page
+        /* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set the body background color and font */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -45,85 +22,116 @@ body {
     margin: 0;
 }
 
+/* Center the login box */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
     height: 100%;
 }
 
-.login-box {
-    background-color: #fff;
+/* Style the login form */
+.login-form {
+    background-color: white;
     padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-}
-
-h2 {
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
-.textbox {
-    margin-bottom: 20px;
+/* Style the input fields */
+.input-group {
+    margin-bottom: 15px;
 }
 
-.textbox input {
+.input-group input {
     width: 100%;
     padding: 10px;
-    margin: 5px 0;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-.checkbox {
-    margin-bottom: 20px;
+.input-group input:focus {
+    border-color: #4CAF50;
+    outline: none;
 }
 
-.forgot-password {
-    text-align: right;
-}
-
-.forgot-password a {
-    text-decoration: none;
-    color: #007bff;
-}
-
-.forgot-password a:hover {
-    text-decoration: underline;
-}
-
+/* Style the login button */
 .btn {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
 }
 
-.signup-link {
-    text-align: center;
-    margin-top: 15px;
+/* Style the error message */
+#error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
 }
 
-.signup-link a {
-    text-decoration: none;
-    color: #007bff;
+/* Responsive design for smaller screens */
+@media screen and (max-width: 480px) {
+    .login-form {
+        width: 280px;
+    }
 }
 
-.signup-link a:hover {
-    text-decoration: underline;
-}
+    </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p id="error-message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script> 
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Get the username and password values
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
+
+    // Basic validation
+    if (username === "" || password === "") {
+        errorMessage.textContent = "Please fill in both fields.";
+    } else if (username === "admin" && password === "password123") {
+        errorMessage.textContent = ""; // Clear the error message
+        alert("Login successful!");
+        // You can redirect to another page after successful login
+        window.location.href = "dashboard.html"; // Example redirection
+    } else {
+        errorMessage.textContent = "Incorrect username or password.";
+    }
+});
+
+</body>
+</html>
+
 
 
